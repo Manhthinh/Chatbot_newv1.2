@@ -1,0 +1,30 @@
+{
+  "domain_fit": "medium",
+  "target_role_from_cv": "Data Analyst",
+  "best_fit_roles": ["Data Analyst", "Business Analyst", "Analytics Engineer"],
+  "strengths": [
+    "Excel nâng cao",
+    "SQL cơ bản",
+    "Phân tích số liệu",
+    "Tinh thần teamwork"
+  ],
+  "missing_skills": [
+    "Python",
+    "Power BI",
+    "Statistics",
+    "Machine Learning"
+  ],
+  "development_plan": [
+    "Học SQL trung cấp",
+    "Làm project Excel nâng cao",
+    "Học Python cơ bản",
+    "Thực hành Power BI"
+  ],
+  "top_role_result": {
+    "role_name": "Data Analyst",
+    "score": 65,
+    "matched_skills": ["Excel", "SQL", "Business Analytics"],
+    "missing_skills": ["Python", "Power BI", "Statistics"],
+    "recommended_next_skills": ["Advanced SQL", "Python", "Data Visualization"]
+  }
+}
