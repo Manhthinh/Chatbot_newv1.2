@@ -1,3 +1,4 @@
+import glob
 import os
 import re
 import json
@@ -12,8 +13,22 @@ import pandas as pd
 # =========================
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_TOPCV_DIR = os.path.join(BASE_DIR, "data_topcv")
 
-RAW_INPUT_PATH = os.path.join(BASE_DIR, "data_topcv", "topcv_all_fields_merged_latest.xlsx")
+# NOTE: Raw file name includes a timestamp. Automatically pick the latest CSV/XLSX.
+def find_latest_raw_file(data_dir: str) -> str:
+    patterns = [os.path.join(data_dir, "topcv_all_fields_merged_*.csv"),
+                os.path.join(data_dir, "topcv_all_fields_merged_*.xlsx")]
+    candidates = []
+    for p in patterns:
+        candidates.extend(glob.glob(p))
+    if not candidates:
+        raise FileNotFoundError(f"Không tìm thấy file raw trong {data_dir}")
+    # sort by modified time descending
+    candidates.sort(key=os.path.getmtime, reverse=True)
+    return candidates[0]
+
+RAW_INPUT_PATH = find_latest_raw_file(DATA_TOPCV_DIR)
 
 OUTPUT_DIR = os.path.join(BASE_DIR, "data_processed")
 
@@ -146,6 +161,10 @@ def merge_semantic_columns(df: pd.DataFrame) -> pd.DataFrame:
         )
     ]
 
+    # working addresses / working times
+    out["working_addresses_raw"] = df.get("working_addresses")
+    out["working_times_raw"] = df.get("working_times")
+
     # experience
     out["experience_raw"] = [
         first_non_empty(a, b)
@@ -218,6 +237,27 @@ def clean_text(text: str) -> str:
     # chuẩn hóa khoảng trắng
     text = re.sub(r"\s+", " ", text).strip()
 
+    return text
+
+
+# =========================
+# HÀM CLEAN WORKING ADDRESSES
+# Nhiệm vụ:
+# - loại bỏ nội dung trong ngoặc (ví dụ: "(quận Tân Bình cũ)")
+# - giữ nguyên phần địa chỉ chính
+# =========================
+def clean_working_addresses(text: str) -> str:
+    text = clean_text(text)
+    if not text:
+        return ""
+
+    # xóa các phần trong ngoặc đơn/ngoặc vuông/ngoặc nhọn
+    text = re.sub(r"\([^)]*\)", " ", text)
+    text = re.sub(r"\[[^\]]*\]", " ", text)
+    text = re.sub(r"\{[^}]*\}", " ", text)
+
+    # chuẩn hóa khoảng trắng sau khi xóa
+    text = re.sub(r"\s+", " ", text).strip()
     return text
 
 
@@ -379,6 +419,10 @@ def select_final_columns(df: pd.DataFrame) -> pd.DataFrame:
         "salary_type",
         "location_raw",
         "location_normalized",
+        "working_addresses_raw",
+        "working_addresses_clean",
+        "working_times_raw",
+        "working_times_clean",
         "experience_raw",
         "experience_min_years",
         "experience_max_years",
@@ -444,6 +488,10 @@ def main():
     df["description_clean"] = df["description_raw"].apply(clean_text)
     df["requirements_clean"] = df["requirements_raw"].apply(clean_text)
     df["benefits_clean"] = df["benefits_raw"].apply(clean_text)
+
+    # Làm sạch địa chỉ làm việc: loại bỏ các chú thích trong ngoặc
+    df["working_addresses_clean"] = df["working_addresses_raw"].apply(clean_working_addresses)
+    df["working_times_clean"] = df["working_times_raw"].apply(clean_text)
 
     print("[STEP 4] Normalize structured columns")
     df["location_normalized"] = df["location_raw"].apply(normalize_location)
