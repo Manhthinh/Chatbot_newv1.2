@@ -1,6 +1,6 @@
 {
   "notebook_version": "preprocessing_v2",
-  "run_date": "2026-03-19 23:38:37",
+  "run_date": "2026-03-20 20:28:03",
   "raw_input_path": "D:\\TTTN\\Project\\data_topcv\\topcv_all_fields_merged_2026-03-16_20-57-23.xlsx",
   "artifacts": {
     "matching_ready": "D:\\TTTN\\Project\\outputs_preprocessing_v2\\artifacts\\jobs_matching_ready_v2.parquet",
@@ -9,7 +9,10 @@
     "job_skill_map": "D:\\TTTN\\Project\\outputs_preprocessing_v2\\artifacts\\job_skill_map_v2.parquet",
     "role_skill_stats": "D:\\TTTN\\Project\\outputs_preprocessing_v2\\artifacts\\role_skill_stats_v2.parquet"
   },
-  "embedding_paths": {},
+  "embedding_paths": {
+    "job_dense_embeddings": "D:\\TTTN\\Project\\outputs_preprocessing_v2\\artifacts\\job_dense_embeddings_v2.npy",
+    "section_dense_embeddings": "D:\\TTTN\\Project\\outputs_preprocessing_v2\\artifacts\\job_section_dense_embeddings_v2.npy"
+  },
   "downstream_field_guide": {
     "tfidf_input": "job_text_sparse",
     "dense_input": "job_text_dense",
