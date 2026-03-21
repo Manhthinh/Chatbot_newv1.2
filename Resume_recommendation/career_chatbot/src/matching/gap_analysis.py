@@ -1,15 +1,27 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import json
+import sys
+from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List
+
+import pandas as pd
+
+if sys.platform == "win32":
+    import io
+
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-ROLE_PROFILE_PATH = BASE_DIR / "data" / "role_profiles" / "role_profiles.json"
+REPO_ROOT = BASE_DIR.parents[1]
 DEFAULT_OUTPUT_PATH = BASE_DIR / "data" / "processed" / "gap_analysis_result.json"
 DEFAULT_CV_JSON = BASE_DIR / "data" / "processed" / "resume_extracted.json"
+DEFAULT_JOBS_READY = REPO_ROOT / "outputs_preprocessing_v2" / "artifacts" / "jobs_chatbot_ready_v2.parquet"
+DEFAULT_JOBS_SECTIONS = REPO_ROOT / "outputs_preprocessing_v2" / "artifacts" / "jobs_chatbot_sections_v2.parquet"
 
 
 ROLE_ALIASES = {
@@ -52,25 +64,25 @@ ROLE_ALIASES = {
     "streamlit": "Streamlit",
     "flask": "Flask",
     "fastapi": "FastAPI",
+    "data governance": "Data Governance",
+    "business analysis": "Business Analysis",
+    "project management": "Project Management",
+    "ai": "AI",
 }
 
 
 ROLE_KEYWORD_HINTS = {
-    "Data Analyst": ["sql", "excel", "power bi", "tableau", "statistics", "dashboard"],
-    "Data Engineer": ["python", "sql", "etl", "airflow", "spark", "data warehouse"],
-    "AI Engineer": ["python", "machine learning", "deep learning", "pytorch", "tensorflow", "llm"],
+    "Data Analyst": ["sql", "excel", "power bi", "tableau", "statistics", "dashboard", "analysis"],
+    "Data Engineer": ["python", "sql", "etl", "airflow", "spark", "data warehouse", "pipeline"],
+    "AI Engineer": ["python", "machine learning", "deep learning", "pytorch", "tensorflow", "llm", "rag"],
     "AI Researcher": ["machine learning", "deep learning", "research", "experiment", "paper", "statistics"],
     "Data Scientist": ["python", "machine learning", "statistics", "pandas", "numpy", "modeling"],
-    "Data Labeling": ["annotation", "data labeling", "quality control", "review"],
+    "Data Governance Specialist": ["data governance", "sql", "etl", "data warehouse", "metadata"],
+    "Business Analyst": ["business analysis", "excel", "sql", "dashboard", "reporting"],
 }
 
 
 def resolve_path(path: str) -> Path:
-    """Resolve a user-provided path.
-
-    - If the path exists as given, return it.
-    - Otherwise try resolving it relative to BASE_DIR.
-    """
     p = Path(path)
     if p.exists():
         return p
@@ -83,13 +95,8 @@ def resolve_path(path: str) -> Path:
 
 
 def load_json(path: Path) -> Dict:
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError as e:
-        raise FileNotFoundError(
-            f"Could not find JSON file at: {path} (tried both as-is and relative to {BASE_DIR})"
-        ) from e
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 def normalize_skill(skill: str) -> str:
@@ -109,287 +116,375 @@ def normalize_skill_list(skills: List[str]) -> List[str]:
     return result
 
 
-def safe_float_div(a: float, b: float) -> float:
-    return a / b if b else 0.0
+def normalize_text(text: str) -> str:
+    return " ".join(str(text).strip().lower().split())
 
 
-def compute_skill_overlap(cv_skills: List[str], role_skills: List[str]) -> Tuple[List[str], List[str], float]:
-    cv_norm = normalize_skill_list(cv_skills)
-    role_norm = normalize_skill_list(role_skills)
-
-    cv_set = {s.lower(): s for s in cv_norm}
-    role_set = {s.lower(): s for s in role_norm}
-
-    matched_keys = sorted(set(cv_set.keys()) & set(role_set.keys()))
-    missing_keys = sorted(set(role_set.keys()) - set(cv_set.keys()))
-
-    matched = [role_set[k] for k in matched_keys]
-    missing = [role_set[k] for k in missing_keys]
-
-    overlap_score = safe_float_div(len(matched), max(len(role_norm), 1))
-    return matched, missing, overlap_score
+def safe_parse_experience(value: Any) -> int:
+    try:
+        if value is None:
+            return 0
+        text = str(value).strip().lower()
+        if text in ["unknown", "", "none", "null", "nan"]:
+            return 0
+        return int(float(text))
+    except Exception:
+        return 0
 
 
-def compute_keyword_match(cv_info: Dict, role_name: str, role_keywords: List[str]) -> float:
-    score = 0.0
+def parse_list_field(value: Any) -> List[str]:
+    if value is None:
+        return []
+    if isinstance(value, list):
+        raw_items = value
+    elif hasattr(value, "tolist"):
+        raw_items = value.tolist()
+    elif isinstance(value, str):
+        stripped = value.strip()
+        if not stripped:
+            return []
+        if stripped.startswith("[") and stripped.endswith("]"):
+            try:
+                parsed = ast.literal_eval(stripped)
+                raw_items = parsed if isinstance(parsed, list) else [stripped]
+            except (ValueError, SyntaxError):
+                raw_items = [part.strip() for part in stripped.split(",")]
+        else:
+            raw_items = [part.strip() for part in stripped.split(",")]
+    else:
+        raw_items = [value]
+
+    cleaned = []
+    seen = set()
+    for item in raw_items:
+        text = str(item).strip()
+        if not text:
+            continue
+        normalized = normalize_skill(text)
+        key = normalized.lower()
+        if key not in seen:
+            seen.add(key)
+            cleaned.append(normalized)
+    return cleaned
+
+
+def parse_profile(value: Any) -> Dict[str, Any]:
+    if isinstance(value, dict):
+        return value
+    if isinstance(value, str):
+        stripped = value.strip()
+        if not stripped:
+            return {}
+        try:
+            parsed = ast.literal_eval(stripped)
+            return parsed if isinstance(parsed, dict) else {}
+        except (ValueError, SyntaxError):
+            return {}
+    return {}
+
+
+def infer_role_name(job_title: str, job_family: str) -> str:
+    title = normalize_text(job_title)
+    family = normalize_text(job_family)
+
+    if "research" in title:
+        return "AI Researcher"
+    if "data scientist" in title:
+        return "Data Scientist"
+    if any(x in title for x in ["ai engineer", "ml engineer", "machine learning engineer", "llm engineer"]):
+        return "AI Engineer"
+    if "data engineer" in title:
+        return "Data Engineer"
+    if "analytics engineer" in title:
+        return "Data Analyst"
+    if "data governance" in title or "governance" in family:
+        return "Data Governance Specialist"
+    if "business analyst" in title or family == "product_project_ba":
+        return "Business Analyst"
+    if "data analyst" in title or family == "data_analytics":
+        return "Data Analyst"
+
+    family_map = {
+        "data_engineering": "Data Engineer",
+        "data_science_ml": "Data Scientist",
+        "data_governance_quality": "Data Governance Specialist",
+        "product_project_ba": "Business Analyst",
+        "data_analytics": "Data Analyst",
+    }
+    if family in family_map:
+        return family_map[family]
+
+    if "analyst" in title:
+        return "Data Analyst"
+    if "engineer" in title:
+        return "Data Engineer"
+
+    return "Other"
+
+
+def compute_role_alignment(cv_info: Dict, role_name: str, job_title: str) -> float:
+    target_role = normalize_text(cv_info.get("target_role", ""))
+    if target_role and target_role != "unknown" and target_role == normalize_text(role_name):
+        return 1.0
 
     text_parts = []
     text_parts.extend(cv_info.get("skills", []))
     text_parts.extend(cv_info.get("projects", []))
     text_parts.extend(cv_info.get("education_signals", []))
-    text_parts.append(cv_info.get("target_role", ""))
+    text_parts.append(cv_info.get("raw_text_preview", ""))
+    text_parts.append(job_title)
+    joined = " ".join(normalize_text(x) for x in text_parts if x)
 
-    joined = " ".join([str(x).lower() for x in text_parts if x])
+    hints = ROLE_KEYWORD_HINTS.get(role_name, [])
+    if not hints:
+        return 0.2
 
-    keyword_hits = 0
-    for kw in role_keywords:
-        if kw.lower() in joined:
-            keyword_hits += 1
-
-    score += safe_float_div(keyword_hits, max(len(role_keywords), 1))
-
-    target_role = str(cv_info.get("target_role", "")).strip().lower()
-    if target_role and target_role != "unknown" and role_name.lower() == target_role:
-        score += 0.5
-
-    return min(score, 1.0)
+    hits = sum(1 for hint in hints if normalize_text(hint) in joined)
+    if hits == 0:
+        return 0.2 if target_role == "unknown" else 0.0
+    return min(hits / max(len(hints), 1) + 0.15, 1.0)
 
 
-def compute_experience_match(cv_experience_years: str, role_name: str, role_profile: Dict) -> float:
-    value = str(cv_experience_years).strip().lower()
+def compute_experience_score(cv_experience_years: Any, min_years: Any) -> float:
+    cv_years = safe_parse_experience(cv_experience_years)
+    required_years = safe_parse_experience(min_years)
 
-    if value == "unknown":
-        return 0.4
-
-    try:
-        years = int(value)
-    except ValueError:
-        return 0.4
-
-    common_patterns = " ".join(role_profile.get("common_experience_patterns", [])).lower()
-
-    if role_name in ["Data Analyst", "Data Scientist"] and years <= 2:
+    if required_years == 0:
+        return 1.0 if cv_years >= 0 else 0.6
+    if cv_years >= required_years:
         return 1.0
-    if role_name == "Data Engineer" and years <= 1:
-        return 0.6
-    if role_name == "AI Engineer" and years <= 1:
-        return 0.6
-    if role_name == "AI Researcher" and years <= 1:
-        return 0.6
-    if role_name == "Data Labeling" and years <= 1:
-        return 1.0
+    if cv_years + 1 >= required_years:
+        return 0.7
+    if cv_years > 0:
+        return 0.45
+    return 0.25
 
-    if "fresher" in common_patterns or "không yêu cầu" in common_patterns:
-        return 1.0
 
-    if years <= 3:
-        return 0.8
-    return 0.7
-
-def analyze_cv_against_roles(cv_info, role_profiles):
-    cv_skills = set(cv_info.get("skills", []))
-    cv_target = cv_info.get("target_role", "Unknown")
-
-    experience_years = safe_parse_experience(cv_info.get("experience_years", 0))
-
-    role_priority = {
-        "Data Analyst": 5,
-        "Data Scientist": 5,
-        "Data Engineer": 5,
-        "AI Engineer": 4,
-        "AI Researcher": 4,
-        "Data Labeling": 1
-    }
-
-    role_scores = []
-
-    for role_name, role_data in role_profiles.items():
-        role_skills = set(role_data.get("common_skills", []))
-
-        matched_skills = cv_skills & role_skills
-        missing_skills = role_skills - cv_skills
-
-        # 1. Skill overlap
-        if len(role_skills) > 0:
-            skill_overlap_score = len(matched_skills) / len(role_skills)
-        else:
-            skill_overlap_score = 0.0
-
-        # 2. Target role match
-        target_role_match_score = 0.0
-        if cv_target != "Unknown" and cv_target == role_name:
-            target_role_match_score = 1.0
-
-        # 3. Experience score
-        if experience_years >= 3:
-            experience_score = 1.0
-        elif experience_years >= 1:
-            experience_score = 0.6
-        else:
-            experience_score = 0.3
-
-        # 4. Keyword-like score from matched skill count
-        if len(matched_skills) >= 3:
-            keyword_score = 1.0
-        elif len(matched_skills) >= 1:
-            keyword_score = 0.5
-        else:
-            keyword_score = 0.0
-
-        priority_bonus = role_priority.get(role_name, 1) * 0.01
-
-        final_score = (
-            0.5 * skill_overlap_score +
-            0.2 * target_role_match_score +
-            0.2 * keyword_score +
-            0.1 * experience_score +
-            priority_bonus
+def build_section_index(sections_df: pd.DataFrame) -> Dict[str, List[Dict[str, Any]]]:
+    index: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+    for _, row in sections_df.iterrows():
+        job_url = str(row.get("job_url", "")).strip()
+        if not job_url:
+            continue
+        index[job_url].append(
+            {
+                "section_type": str(row.get("section_type", "")),
+                "chunk_order": int(row.get("chunk_order", 0)),
+                "chunk_text": str(row.get("chunk_text", "")),
+                "importance_weight": float(row.get("importance_weight", 0.0)),
+            }
         )
 
-        role_scores.append({
-            "role": role_name,
-            "score": round(final_score, 3),
-            "skill_overlap_score": round(skill_overlap_score, 3),
-            "target_role_match_score": round(target_role_match_score, 3),
-            "keyword_match_score": round(keyword_score, 3),
-            "experience_score": round(experience_score, 3),
-            "matched_skills": sorted(list(matched_skills)),
-            "missing_skills": sorted(list(missing_skills))
-        })
+    for job_url in index:
+        index[job_url].sort(key=lambda item: (-(item["importance_weight"]), item["chunk_order"]))
+    return index
 
-    # Nếu role_profiles rỗng thì trả kết quả an toàn
-    if not role_scores:
-        return {
-            "target_role_from_cv": cv_target,
-            "domain_fit": "low",
-            "best_fit_roles": [],
-            "strengths": [],
-            "missing_skills": [],
-            "top_role_result": {},
-            "role_ranking": []
+
+def select_relevant_sections(
+    sections: List[Dict[str, Any]],
+    cv_skills_norm: set[str],
+    target_role: str,
+    limit: int = 3,
+) -> List[Dict[str, Any]]:
+    scored = []
+    target_role_norm = normalize_text(target_role)
+    for item in sections:
+        text_norm = normalize_text(item["chunk_text"])
+        skill_hits = sum(1 for skill in cv_skills_norm if skill in text_norm)
+        role_hit = 1 if target_role_norm and target_role_norm != "unknown" and target_role_norm in text_norm else 0
+        section_bonus = 0.0
+        if item["section_type"] == "requirements":
+            section_bonus = 1.0
+        elif item["section_type"] == "description":
+            section_bonus = 0.5
+
+        score = item["importance_weight"] + skill_hits * 1.5 + role_hit + section_bonus
+        scored.append({**item, "score": score})
+
+    scored.sort(key=lambda item: (-item["score"], item["chunk_order"]))
+    return scored[:limit]
+
+
+def build_development_plan(missing_skills: List[str], matched_jobs: List[Dict[str, Any]]) -> List[str]:
+    plan = []
+    for skill in missing_skills[:4]:
+        plan.append(f"Học hoặc củng cố {skill}")
+
+    for job in matched_jobs[:2]:
+        if len(plan) >= 5:
+            break
+        title = job.get("job_title", "")
+        if title:
+            plan.append(f"Đọc kỹ JD '{title}' và làm 1 mini-project bám theo yêu cầu chính")
+
+    return plan[:5]
+
+
+def match_cv_to_jobs(cv_info: Dict, ready_df: pd.DataFrame, sections_df: pd.DataFrame) -> Dict[str, Any]:
+    cv_skills = normalize_skill_list(cv_info.get("skills", []))
+    cv_skills_norm = {skill.lower() for skill in cv_skills}
+    target_role = str(cv_info.get("target_role", "Unknown")).strip() or "Unknown"
+    target_role_norm = normalize_text(target_role)
+    section_index = build_section_index(sections_df)
+
+    job_matches = []
+    role_buckets: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+
+    for _, row in ready_df.iterrows():
+        profile = parse_profile(row.get("job_chatbot_profile"))
+        job_title = str(row.get("job_title_display", "")).strip()
+        job_family = str(row.get("job_family", "")).strip()
+        job_role = infer_role_name(job_title, job_family)
+        if job_role == "Other":
+            continue
+
+        required_skills = parse_list_field(row.get("skills_required"))
+        preferred_skills = parse_list_field(row.get("skills_preferred"))
+        if profile:
+            required_skills = required_skills or parse_list_field(profile.get("skills_required"))
+            preferred_skills = preferred_skills or parse_list_field(profile.get("skills_preferred"))
+
+        all_job_skills = normalize_skill_list(required_skills + preferred_skills)
+        all_job_skill_norm = {skill.lower() for skill in all_job_skills}
+        matched_skills = [skill for skill in all_job_skills if skill.lower() in cv_skills_norm]
+        missing_skills = [skill for skill in all_job_skills if skill.lower() not in cv_skills_norm]
+
+        required_coverage = len([skill for skill in required_skills if normalize_skill(skill).lower() in cv_skills_norm]) / max(len(required_skills), 1) if required_skills else 0.0
+        preferred_coverage = len([skill for skill in preferred_skills if normalize_skill(skill).lower() in cv_skills_norm]) / max(len(preferred_skills), 1) if preferred_skills else 0.0
+        all_coverage = len(matched_skills) / max(len(all_job_skills), 1) if all_job_skills else 0.0
+        role_alignment = compute_role_alignment(cv_info, job_role, job_title)
+        experience_score = compute_experience_score(
+            cv_info.get("experience_years", "Unknown"),
+            profile.get("experience_min_years"),
+        )
+
+        final_score = (
+            0.45 * required_coverage
+            + 0.2 * preferred_coverage
+            + 0.2 * role_alignment
+            + 0.15 * experience_score
+        )
+
+        if not all_job_skills:
+            final_score = max(final_score, 0.25 * role_alignment + 0.1 * experience_score)
+
+        score_pct = round(final_score * 100, 2)
+
+        job_url = str(row.get("job_url", "")).strip()
+        relevant_sections = select_relevant_sections(
+            section_index.get(job_url, []),
+            cv_skills_norm,
+            target_role_norm,
+            limit=3,
+        )
+
+        job_result = {
+            "job_title": job_title,
+            "role_name": job_role,
+            "job_family": job_family,
+            "job_url": job_url,
+            "location": str(row.get("location_norm", "unknown")),
+            "work_mode": str(row.get("work_mode", "unknown")),
+            "score": score_pct,
+            "required_skills": required_skills,
+            "preferred_skills": preferred_skills,
+            "matched_skills": matched_skills,
+            "missing_skills": missing_skills,
+            "experience_min_years": profile.get("experience_min_years", 0),
+            "education_level_norm": profile.get("education_level_norm", ""),
+            "job_text_chatbot": str(row.get("job_text_chatbot", "")),
+            "relevant_sections": relevant_sections,
         }
 
-    role_scores.sort(key=lambda x: x["score"], reverse=True)
+        job_matches.append(job_result)
+        role_buckets[job_role].append(job_result)
 
-    top_role = role_scores[0]
-    best_roles = [r["role"] for r in role_scores[:3]]
+    job_matches.sort(key=lambda item: item["score"], reverse=True)
 
-    matched_count = len(top_role["matched_skills"])
-    top_score = top_role["score"]
+    role_ranking = []
+    for role_name, jobs in role_buckets.items():
+        sorted_jobs = sorted(jobs, key=lambda item: item["score"], reverse=True)
+        top_jobs = sorted_jobs[:3]
+        matched_counter = Counter()
+        missing_counter = Counter()
+        for job in top_jobs:
+            matched_counter.update(job["matched_skills"])
+            missing_counter.update(job["missing_skills"])
 
-    # Domain fit logic
-    if cv_target == "Unknown" and matched_count < 2:
-        domain_fit = "low"
-    elif top_score >= 0.6:
+        role_ranking.append(
+            {
+                "role_name": role_name,
+                "role": role_name,
+                "score": round(sum(job["score"] for job in top_jobs) / max(len(top_jobs), 1), 2),
+                "skill_overlap_score": round(sum(len(job["matched_skills"]) / max(len(job["required_skills"]) + len(job["preferred_skills"]), 1) for job in top_jobs) / max(len(top_jobs), 1), 4),
+                "keyword_match_score": round(sum(compute_role_alignment(cv_info, role_name, job["job_title"]) for job in top_jobs) / max(len(top_jobs), 1), 4),
+                "experience_score": round(sum(compute_experience_score(cv_info.get("experience_years", "Unknown"), job["experience_min_years"]) for job in top_jobs) / max(len(top_jobs), 1), 4),
+                "target_role_match_score": 1.0 if normalize_text(role_name) == target_role_norm and target_role_norm != "unknown" else 0.0,
+                "matched_skills": [skill for skill, _ in matched_counter.most_common(8)],
+                "missing_skills": [skill for skill, _ in missing_counter.most_common(12)],
+                "recommended_next_skills": [skill for skill, _ in missing_counter.most_common(8)],
+                "top_jobs": [job["job_title"] for job in top_jobs],
+            }
+        )
+
+    role_ranking.sort(key=lambda item: item["score"], reverse=True)
+
+    top_jobs = job_matches[:5]
+    top_role = role_ranking[0] if role_ranking else {
+        "role_name": target_role,
+        "role": target_role,
+        "score": 0.0,
+        "matched_skills": [],
+        "missing_skills": [],
+        "recommended_next_skills": [],
+    }
+
+    top_score = float(top_role.get("score", 0.0))
+    if top_score >= 65:
         domain_fit = "high"
-    elif top_score >= 0.35:
+    elif top_score >= 40:
         domain_fit = "medium"
     else:
         domain_fit = "low"
 
-    # Nếu ngoài domain thì fallback missing skills về Data Analyst
-    if domain_fit == "low" and "Data Analyst" in role_profiles:
-        da_skills = set(role_profiles["Data Analyst"].get("common_skills", []))
-        missing_skills = sorted(list(da_skills - cv_skills))
-    else:
-        missing_skills = top_role["missing_skills"]
+    strengths_counter = Counter()
+    missing_counter = Counter()
+    for job in top_jobs[:3]:
+        strengths_counter.update(job["matched_skills"])
+    for job in top_jobs[:5]:
+        missing_counter.update(job["missing_skills"])
+
+    strengths = [skill for skill, _ in strengths_counter.most_common(8)]
+    missing_skills = [skill for skill, _ in missing_counter.most_common(10)]
+    best_fit_roles = [item["role_name"] for item in role_ranking[:3]]
+
+    matched_sections = []
+    for job in top_jobs[:2]:
+        for section in job["relevant_sections"]:
+            matched_sections.append(
+                {
+                    "job_title": job["job_title"],
+                    "role_name": job["role_name"],
+                    "section_type": section["section_type"],
+                    "chunk_text": section["chunk_text"],
+                    "score": round(section["score"], 3),
+                }
+            )
 
     result = {
-        "target_role_from_cv": cv_target,
+        "target_role_from_cv": target_role,
         "domain_fit": domain_fit,
-        "best_fit_roles": best_roles,
-        "strengths": top_role["matched_skills"],
-        "missing_skills": missing_skills[:10],
-        "top_role_result": top_role,
-        "role_ranking": role_scores[:5]
-    }
-
-    return result
-def score_role(cv_info: Dict, role_name: str, role_profile: Dict) -> Dict:
-    cv_skills = cv_info.get("skills", [])
-    role_skills = role_profile.get("common_skills", [])
-
-    matched_skills, missing_skills, skill_overlap_score = compute_skill_overlap(cv_skills, role_skills)
-
-    role_keywords = role_profile.get("common_keywords", [])
-    if not role_keywords:
-        role_keywords = ROLE_KEYWORD_HINTS.get(role_name, [])
-
-    keyword_match_score = compute_keyword_match(cv_info, role_name, role_keywords)
-    experience_match_score = compute_experience_match(
-        cv_info.get("experience_years", "Unknown"),
-        role_name,
-        role_profile,
-    )
-
-    target_role_match_score = 0.0
-    target_role = str(cv_info.get("target_role", "")).strip().lower()
-    if target_role and target_role != "unknown" and role_name.lower() == target_role:
-        target_role_match_score = 1.0
-    role_priority = {
-            "Data Analyst": 5,
-            "Data Scientist": 5,
-            "Data Engineer": 5,
-            "AI Engineer": 4,
-            "AI Researcher": 4,
-            "Data Labeling": 1
-        }
-
-    priority_bonus = role_priority.get(role_name, 1) * 0.01
-    final_score = (
-        0.5 * skill_overlap_score
-        + 0.2 * keyword_match_score
-        + 0.2 * experience_match_score
-        + 0.1 * target_role_match_score
-        + priority_bonus
-    )
-
-    return {
-        "role_name": role_name,
-        "score": round(final_score, 4),
-        "skill_overlap_score": round(skill_overlap_score, 4),
-        "keyword_match_score": round(keyword_match_score, 4),
-        "experience_match_score": round(experience_match_score, 4),
-        "target_role_match_score": round(target_role_match_score, 4),
-        "matched_skills": matched_skills,
+        "best_fit_roles": best_fit_roles,
+        "strengths": strengths,
         "missing_skills": missing_skills,
-        "recommended_next_skills": role_profile.get("recommended_next_skills", []),
-        "common_skills": role_profile.get("common_skills", []),
+        "development_plan": build_development_plan(missing_skills, top_jobs),
+        "top_role_result": top_role,
+        "role_ranking": role_ranking[:5],
+        "top_job_matches": top_jobs,
+        "matched_job_sections": matched_sections[:6],
+        "cv_skill_count": len(cv_skills),
     }
-
-
-def build_development_plan(best_role_result: Dict, cv_info: Dict) -> List[str]:
-    plan = []
-
-    missing_skills = best_role_result.get("missing_skills", [])
-    recommended = best_role_result.get("recommended_next_skills", [])
-
-    for skill in missing_skills[:3]:
-        plan.append(f"Học hoặc củng cố {skill}")
-
-    for skill in recommended:
-        if len(plan) >= 5:
-            break
-        if all(skill.lower() not in p.lower() for p in plan):
-            plan.append(f"Phát triển thêm {skill}")
-
-    projects = cv_info.get("projects", [])
-    if not projects:
-        plan.append("Bổ sung ít nhất 1 project thực tế vào CV")
-
-    return plan[:5]
-
-def safe_parse_experience(value):
-    try:
-        if value is None:
-            return 0
-        text = str(value).strip().lower()
-        if text in ["unknown", "", "none", "null"]:
-            return 0
-        return int(text)
-    except Exception:
-        return 0
-
+    return result
 
 
 def main() -> None:
@@ -400,9 +495,14 @@ def main() -> None:
         help=f"Path to extracted CV JSON (default: {DEFAULT_CV_JSON})",
     )
     parser.add_argument(
-        "--role_profiles",
-        default=str(ROLE_PROFILE_PATH),
-        help="Path to role_profiles.json",
+        "--jobs_ready_path",
+        default=str(DEFAULT_JOBS_READY),
+        help="Path to jobs_chatbot_ready_v2.parquet",
+    )
+    parser.add_argument(
+        "--jobs_sections_path",
+        default=str(DEFAULT_JOBS_SECTIONS),
+        help="Path to jobs_chatbot_sections_v2.parquet",
     )
     parser.add_argument(
         "--output_path",
@@ -412,15 +512,17 @@ def main() -> None:
     args = parser.parse_args()
 
     cv_json_path = resolve_path(args.cv_json)
-    role_profile_path = resolve_path(args.role_profiles)
+    jobs_ready_path = resolve_path(args.jobs_ready_path)
+    jobs_sections_path = resolve_path(args.jobs_sections_path)
     output_path = resolve_path(args.output_path)
 
     cv_info = load_json(cv_json_path)
-    role_profiles = load_json(role_profile_path)
+    ready_df = pd.read_parquet(jobs_ready_path)
+    sections_df = pd.read_parquet(jobs_sections_path)
 
-    result = analyze_cv_against_roles(cv_info, role_profiles)
+    result = match_cv_to_jobs(cv_info, ready_df, sections_df)
 
-    print(json.dumps(result, ensure_ascii=True, indent=2))
+    print(json.dumps(result, ensure_ascii=False, indent=2))
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:

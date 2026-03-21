@@ -1,0 +1,540 @@
+{
+  "target_role_from_cv": "Data Analyst",
+  "domain_fit": "medium",
+  "best_fit_roles": [
+    "Data Analyst",
+    "Data Scientist",
+    "AI Researcher"
+  ],
+  "strengths": [
+    "Statistics"
+  ],
+  "missing_skills": [
+    "Excel",
+    "Power BI",
+    "SQL",
+    "Tableau",
+    "Python",
+    "looker"
+  ],
+  "development_plan": [
+    "Học hoặc củng cố Excel",
+    "Học hoặc củng cố Power BI",
+    "Học hoặc củng cố SQL",
+    "Học hoặc củng cố Tableau",
+    "Đọc kỹ JD 'Credit Risk Analytics And Modelling Expert' và làm 1 mini-project bám theo yêu cầu chính"
+  ],
+  "top_role_result": {
+    "role_name": "Data Analyst",
+    "role": "Data Analyst",
+    "score": 57.42,
+    "skill_overlap_score": 0.5111,
+    "keyword_match_score": 1.0,
+    "experience_score": 0.55,
+    "target_role_match_score": 1.0,
+    "matched_skills": [
+      "Statistics"
+    ],
+    "missing_skills": [
+      "Excel",
+      "Power BI",
+      "SQL",
+      "Tableau"
+    ],
+    "recommended_next_skills": [
+      "Excel",
+      "Power BI",
+      "SQL",
+      "Tableau"
+    ],
+    "top_jobs": [
+      "Credit Risk Analytics And Modelling Expert",
+      "Chuyên Viên Power BI,Tableau",
+      "Data Analyst Workforce Management"
+    ]
+  },
+  "role_ranking": [
+    {
+      "role_name": "Data Analyst",
+      "role": "Data Analyst",
+      "score": 57.42,
+      "skill_overlap_score": 0.5111,
+      "keyword_match_score": 1.0,
+      "experience_score": 0.55,
+      "target_role_match_score": 1.0,
+      "matched_skills": [
+        "Statistics"
+      ],
+      "missing_skills": [
+        "Excel",
+        "Power BI",
+        "SQL",
+        "Tableau"
+      ],
+      "recommended_next_skills": [
+        "Excel",
+        "Power BI",
+        "SQL",
+        "Tableau"
+      ],
+      "top_jobs": [
+        "Credit Risk Analytics And Modelling Expert",
+        "Chuyên Viên Power BI,Tableau",
+        "Data Analyst Workforce Management"
+      ]
+    },
+    {
+      "role_name": "Data Scientist",
+      "role": "Data Scientist",
+      "score": 29.43,
+      "skill_overlap_score": 0.2386,
+      "keyword_match_score": 0.3722,
+      "experience_score": 0.75,
+      "target_role_match_score": 0.0,
+      "matched_skills": [
+        "Statistics"
+      ],
+      "missing_skills": [
+        "Machine Learning",
+        "AI",
+        "Python",
+        "r",
+        "SQL",
+        "Spark",
+        "AWS",
+        "GCP",
+        "Azure",
+        "Power BI",
+        "Tableau",
+        "Pandas"
+      ],
+      "recommended_next_skills": [
+        "Machine Learning",
+        "AI",
+        "Python",
+        "r",
+        "SQL",
+        "Spark",
+        "AWS",
+        "GCP"
+      ],
+      "top_jobs": [
+        "Data Scientist Expert - Hà Nội - TA150",
+        "Chuyên Viên Mô Hình Và Phân Tích Nâng Cao - Data Scientist - Modeling And Advanced Analytics - Khối Dữ Liệu (HOLT.07)",
+        "Fresher AI (NLP)"
+      ]
+    },
+    {
+      "role_name": "AI Researcher",
+      "role": "AI Researcher",
+      "score": 20.17,
+      "skill_overlap_score": 0.0667,
+      "keyword_match_score": 0.4833,
+      "experience_score": 0.5,
+      "target_role_match_score": 0.0,
+      "matched_skills": [
+        "Statistics"
+      ],
+      "missing_skills": [
+        "PyTorch",
+        "Deep Learning",
+        "Python",
+        "Machine Learning",
+        "AI",
+        "r",
+        "NLP",
+        "LLM",
+        "TensorFlow"
+      ],
+      "recommended_next_skills": [
+        "PyTorch",
+        "Deep Learning",
+        "Python",
+        "Machine Learning",
+        "AI",
+        "r",
+        "NLP",
+        "LLM"
+      ],
+      "top_jobs": [
+        "AI Quantitative Researcher Intern",
+        "Kỹ Sư Lập Trình AI Voice (Senior AI Research Engineer ) - Thu Nhập 35 Triệu Tại Hà Nội",
+        "NLP Research Engineer"
+      ]
+    },
+    {
+      "role_name": "AI Engineer",
+      "role": "AI Engineer",
+      "score": 18.82,
+      "skill_overlap_score": 0.1111,
+      "keyword_match_score": 0.1952,
+      "experience_score": 0.55,
+      "target_role_match_score": 0.0,
+      "matched_skills": [
+        "Statistics"
+      ],
+      "missing_skills": [
+        "Python",
+        "c++",
+        "PyTorch",
+        "Docker",
+        "NLP",
+        "Computer Vision",
+        "r",
+        "FastAPI",
+        "Flask",
+        "TensorFlow",
+        "api",
+        "Git"
+      ],
+      "recommended_next_skills": [
+        "Python",
+        "c++",
+        "PyTorch",
+        "Docker",
+        "NLP",
+        "Computer Vision",
+        "r",
+        "FastAPI"
+      ],
+      "top_jobs": [
+        "AI Engineer",
+        "AI Engineer (Computer Vision/NPL/LLM) - Khối Công Nghệ Thông Tin (HOLT.13)",
+        "AI Engineer (LLM/ NLP/ Computer Vision)"
+      ]
+    },
+    {
+      "role_name": "Data Engineer",
+      "role": "Data Engineer",
+      "score": 15.45,
+      "skill_overlap_score": 0.0,
+      "keyword_match_score": 0.0976,
+      "experience_score": 0.9,
+      "target_role_match_score": 0.0,
+      "matched_skills": [],
+      "missing_skills": [
+        "SQL",
+        "Spark",
+        "Python",
+        "hadoop",
+        "kafka",
+        "Docker",
+        "kubernetes",
+        "ETL",
+        "Scikit-learn",
+        "AI",
+        "javascript"
+      ],
+      "recommended_next_skills": [
+        "SQL",
+        "Spark",
+        "Python",
+        "hadoop",
+        "kafka",
+        "Docker",
+        "kubernetes",
+        "ETL"
+      ],
+      "top_jobs": [
+        "Big Data Admin (Kafka/Docker/Data Warehousing/Spark)",
+        "Fresher Data Engineer",
+        "Data Engineer Intern"
+      ]
+    }
+  ],
+  "top_job_matches": [
+    {
+      "job_title": "Credit Risk Analytics And Modelling Expert",
+      "role_name": "Data Analyst",
+      "job_family": "data_analytics",
+      "job_url": "https://www.topcv.vn/brand/techcombank/tuyen-dung/credit-risk-analytics-and-modelling-expert-j1999111.html",
+      "location": "hà nội",
+      "work_mode": "unknown",
+      "score": 68.75,
+      "required_skills": [
+        "Statistics"
+      ],
+      "preferred_skills": [],
+      "matched_skills": [
+        "Statistics"
+      ],
+      "missing_skills": [],
+      "experience_min_years": 5.0,
+      "education_level_norm": "bachelor",
+      "job_text_chatbot": "Job title: Credit Risk Analytics And Modelling Expert\n\nJob family: data_analytics\n\nLocation: hà nội\n\nSalary VND/month: min=nan | max=nan\n\nRequirements:\nTối thiểu 8 năm kinh nghiệm trong lĩnh vực Ngân hàng, Mô hình hóa Rủi ro hoặc các lĩnh vực tương đương. Hiểu biết về các quy định và thông lệ quốc tế về Basel 2, IFRS9 và Kiểm tra Stress-Test. Kinh nghiệm sâu rộng trong việc xây dựng các giải pháp dữ liệu và phân tích, khai thác dữ liệu (data mining), phân tích thống kê và trực quan hóa dữ liệu (data visualization). Kinh nghiệm cung cấp thông tin chuyên sâu dựa trên dữ kiện để giúp quản lý cấp cao và các bên liên quan khác nhận ra giá trị doanh nghiệp trên quy mô lớn. Tư duy và khả năng đưa ra quyết định chiến lược, có khả năng làm việc với quản lý rất cấp cao, chuyển đổi ngôn ngữ công nghệ sang kinh doanh và ngược lại. Bằng Cử nhân hoặc cao hơn (tài chính / ngân hàng / quản lý rủi ro tài chính / toán tài chính / tài chính định lượng). Ưu tiên đào tạo ở cấp độ đại học hoặc sau đại học trong các lĩnh vực này tại các quốc gia phát triển Có các chứng chỉ được quốc tế công nhận về phân tích tài chính, quản lý rủi ro tài chính là một lợi thế (ví dụ: FRM, CFA, PRM, CPA, ...). Yêu cầu về trình độ tiếng Anh tuân theo chính sách của Techcombank.\nTối thiểu 8 năm kinh nghiệm trong lĩnh vực Ngân hàng, Mô hình hóa Rủi ro hoặc các lĩnh vực tương\n\nResponsibilities:\nVị trí này phụ trách tư vấn và cung cấp cho ngân hàng các hiểu biết chuyên sâu (insights) về rủi ro tín dụng từ dữ liệu lớn có cấu trúc và phi cấu trúc, nhằm hỗ trợ tối ưu hóa danh mục tín dụng và lập kế hoạch chiến lược. Xây dựng các mô hình và giải pháp rủi ro tín dụng bằng cách sử dụng phân tích thống kê, học máy (machine learning) nâng cao, khai thác dữ liệu và các kỹ thuật trực quan hóa dữ liệu, nhằm tạo ra các giải pháp hỗ trợ ra quyết định tín dụng trong suốt vòng đời tín dụng của khách hàng. Trách nhiệm chính: 1. Mô hình Rủi ro Tín dụng và các công cụ đo lường Phát triển và liên tục cải thiện các mô hình rủi ro tín dụng để hỗ trợ ra quyết định tín dụng trong suốt vòng đời tín dụng của khách hàng: từ thẩm định và phê duyệt (underwriting), cảnh báo sớm, đến thu hồi nợ và xử lý nợ. Phát triển các công cụ và phương pháp đo lường rủi ro tín dụng tuân thủ các quy định của cơ quan quản lý và các thông lệ ngành (Ngân hàng Nhà nước - SBV, Basel, IFRS9). Thúc đẩy việc triển khai và sử dụng mô hình thông qua các đề xuất/mô phỏng chiến lược cut-off. Theo dõi và hiệu chỉnh mô hình định kỳ dựa trên các dữ liệu mới thu thập được hoặc các phát hiện quan trọng từ việc giám sát/kiểm định mô\n\nBenefits:\nThời gian làm việc: Giờ hành chính (Office Hours). Thời gian thử việc: 2 tháng (hưởng 100% lương). Mức lương cơ bản cực kỳ hấp dẫn, lương tháng 13 + Thưởng hiệu suất công việc (Performance Bonus) lên đến 5 tháng lương. Xem xét đánh giá mức lương và hiệu suất công việc hàng năm. Được tham gia các khóa đào tạo nâng cao của Techcombank. Lộ trình sự nghiệp rõ ràng với sự hỗ trợ từ quản lý; Được chăm sóc toàn diện với Bảo hiểm Sức khỏe Cá nhân và Gia đình; Khám sức khỏe định kỳ, Sinh nhật Ngân hàng, Teambuilding, Tiệc cuối năm,...\nThời gian làm việc: Giờ hành chính (Office Hours).\nThời gian thử việc: 2 tháng (hưởng 100% lương).\nMức lương cơ bản cực kỳ hấp dẫn, lương tháng 13 + Thưởng hiệu suất công việc (Performance Bonus) lên đến 5 tháng lương. Xem xét đánh giá mức lương và hiệu suất công việc\n\nRequired skills: statistics",
+      "relevant_sections": [
+        {
+          "section_type": "requirements",
+          "chunk_order": 2,
+          "chunk_text": "Tối thiểu 8 năm kinh nghiệm trong lĩnh vực Ngân hàng, Mô hình hóa Rủi ro hoặc các lĩnh vực tương đương. Hiểu biết về các quy định và thông lệ quốc tế về Basel 2, IFRS9 và Kiểm tra Stress-Test. Kinh nghiệm sâu rộng trong việc xây dựng các giải pháp dữ liệu và phân tích, khai thác dữ liệu (data mining), phân tích thống kê và trực quan hóa dữ liệu (data visualization). Kinh nghiệm cung cấp thông tin chuyên sâu dựa trên dữ kiện để giúp quản lý cấp cao và các bên liên quan khác nhận ra giá trị doanh nghiệp trên quy mô lớn. Tư duy và khả năng đưa ra quyết định chiến lược, có khả năng làm việc với quản lý rất cấp cao, chuyển đổi ngôn ngữ công nghệ sang kinh doanh và ngược lại. Bằng Cử nhân hoặc cao",
+          "importance_weight": 1.3,
+          "score": 2.3
+        },
+        {
+          "section_type": "requirements",
+          "chunk_order": 3,
+          "chunk_text": "huyển đổi ngôn ngữ công nghệ sang kinh doanh và ngược lại. Bằng Cử nhân hoặc cao hơn (tài chính / ngân hàng / quản lý rủi ro tài chính / toán tài chính / tài chính định lượng). Ưu tiên đào tạo ở cấp độ đại học hoặc sau đại học trong các lĩnh vực này tại các quốc gia phát triển Có các chứng chỉ được quốc tế công nhận về phân tích tài chính, quản lý rủi ro tài chính là một lợi thế (ví dụ: FRM, CFA, PRM, CPA, ...). Yêu cầu về trình độ tiếng Anh tuân theo chính sách của Techcombank.\nTối thiểu 8 năm kinh nghiệm trong lĩnh vực Ngân hàng, Mô hình hóa Rủi ro hoặc các lĩnh vực tương đương.\nHiểu biết về các quy định và thông lệ quốc tế về Basel 2, IFRS9 và Kiểm tra Stress-Test.\nKinh nghiệm sâu rộng tr",
+          "importance_weight": 1.3,
+          "score": 2.3
+        },
+        {
+          "section_type": "requirements",
+          "chunk_order": 4,
+          "chunk_text": "ng lệ quốc tế về Basel 2, IFRS9 và Kiểm tra Stress-Test.\nKinh nghiệm sâu rộng trong việc xây dựng các giải pháp dữ liệu và phân tích, khai thác dữ liệu (data mining), phân tích thống kê và trực quan hóa dữ liệu (data visualization).\nKinh nghiệm cung cấp thông tin chuyên sâu dựa trên dữ kiện để giúp quản lý cấp cao và các bên liên quan khác nhận ra giá trị doanh nghiệp trên quy mô lớn.\nTư duy và khả năng đưa ra quyết định chiến lược, có khả năng làm việc với quản lý rất cấp cao, chuyển đổi ngôn ngữ công nghệ sang kinh doanh và ngược lại.\nBằng Cử nhân hoặc cao hơn (tài chính / ngân hàng / quản lý rủi ro tài chính / toán tài chính / tài chính định lượng).\nƯu tiên đào tạo ở cấp độ đại học hoặc s",
+          "importance_weight": 1.3,
+          "score": 2.3
+        }
+      ]
+    },
+    {
+      "job_title": "Chuyên Viên Power BI,Tableau",
+      "role_name": "Data Analyst",
+      "job_family": "data_analytics",
+      "job_url": "https://www.topcv.vn/viec-lam/chuyen-vien-power-bi-tableau/2056062.html",
+      "location": "hà nội",
+      "work_mode": "unknown",
+      "score": 53.0,
+      "required_skills": [
+        "Statistics",
+        "Excel"
+      ],
+      "preferred_skills": [
+        "SQL",
+        "Power BI",
+        "Tableau"
+      ],
+      "matched_skills": [
+        "Statistics"
+      ],
+      "missing_skills": [
+        "Excel",
+        "SQL",
+        "Power BI",
+        "Tableau"
+      ],
+      "experience_min_years": 1.0,
+      "education_level_norm": "bachelor",
+      "job_text_chatbot": "Job title: Chuyên Viên Power BI,Tableau\n\nJob family: data_analytics\n\nLocation: hà nội\n\nSalary VND/month: min=15000000.0 | max=22000000.0\n\nRequirements:\nTốt nghiệp Đại học các ngành Kinh tế, Tài chính, Thống kê, Toán, CNTT hoặc liên quan.\nChuyên viên:\nTối thiểu 1 năm kinh nghiệm phân tích dữ liệu/báo cáo quản trị.\nTư duy logic, cẩn trọng, chủ động; khả năng tổng hợp và trình bày số liệu tốt.\nThành thạo Excel; ưu tiên biết SQL, Power BI/Tableau/BI tools; có hiểu biết về mô hình tài chính, dự báo là lợi thế.\n\nResponsibilities:\nThu thập, tổng hợp, đối soát và chuẩn hóa dữ liệu phục vụ phân tích quản trị: doanh thu, phí, chi phí, sản phẩm/dịch vụ, đối tác, khách hàng, nhân sự, vận hành nền tảng.\nTham gia xây dựng và vận hành kho dữ liệu, danh mục chỉ tiêu và tiêu chuẩn dữ liệu phục vụ báo cáo.\nThực hiện phân tích hiệu quả kinh doanh - vận hành theo sản phẩm, kênh, đối tác, đơn vị; theo dõi các chỉ số như doanh thu/giao dịch, chi phí/giao dịch, biên lợi nhuận, LTV.\nPhân tích chênh lệch kế hoạch - thực hiện, xác định nguyên nhân biến động và đề xuất kiến nghị cải thiện.\nPhân tích cơ cấu chi phí, năng suất và hiệu quả sử dụng nguồn lực; hỗ trợ xác định điểm hòa vốn, ngưỡng hiệu quả.\nTham gia xây dựng, cập nhật báo cáo quản trị định kỳ (ngày/tuần/tháng), dashboard phục vụ Ban Lãnh đạo.\nHỗ trợ đánh giá hiệu quả các chương trình/dự án/thử nghiệm (trước-sau, ROI) theo phân công.\nPhối hợp với các Phòng/Ban để làm rõ số liệu, bảo đảm tính thống nhất và chính xác.\nTham gia cải tiến công cụ, tự động hóa báo cáo và thực hiện các nhiệm vụ khác theo phân công.\n\nBenefits:\nLương: Từ 15 triệu- 22 triệu\nThưởng KPI hàng tháng,\ntháng lương thứ 13\n.\nMôi trường làm việc\nCông nghệ - Tài chính (Fintech)\nchuyên nghiệp, năng động.\nĐược đào tạo văn hóa Vanto - công ty tư vấn thuộc top đào tạo tư vấn của Mỹ.\nĐược đào tạo kiến thức & kỹ năng xây dựng đội ngũ, làm việc hiệu suất cao theo khoa học quản trị.\nXét nâng lương định kỳ theo chính sách Công ty.\nHưởng đầy đủ BHXH, BHYT, nghỉ phép, nghỉ mát, team building, du lịch hằng năm và các phúc lợi khác.\n\nRequired skills: statistics; excel\n\nPreferred skills: sql; power bi; tableau",
+      "relevant_sections": [
+        {
+          "section_type": "requirements",
+          "chunk_order": 2,
+          "chunk_text": "Tốt nghiệp Đại học các ngành Kinh tế, Tài chính, Thống kê, Toán, CNTT hoặc liên quan.\nChuyên viên:\nTối thiểu 1 năm kinh nghiệm phân tích dữ liệu/báo cáo quản trị.\nTư duy logic, cẩn trọng, chủ động; khả năng tổng hợp và trình bày số liệu tốt.\nThành thạo Excel; ưu tiên biết SQL, Power BI/Tableau/BI tools; có hiểu biết về mô hình tài chính, dự báo là lợi thế.",
+          "importance_weight": 1.3,
+          "score": 2.3
+        },
+        {
+          "section_type": "title",
+          "chunk_order": 1,
+          "chunk_text": "chuyên viên power bi,tableau",
+          "importance_weight": 1.5,
+          "score": 1.5
+        },
+        {
+          "section_type": "description",
+          "chunk_order": 3,
+          "chunk_text": "Thu thập, tổng hợp, đối soát và chuẩn hóa dữ liệu phục vụ phân tích quản trị: doanh thu, phí, chi phí, sản phẩm/dịch vụ, đối tác, khách hàng, nhân sự, vận hành nền tảng.\nTham gia xây dựng và vận hành kho dữ liệu, danh mục chỉ tiêu và tiêu chuẩn dữ liệu phục vụ báo cáo.\nThực hiện phân tích hiệu quả kinh doanh - vận hành theo sản phẩm, kênh, đối tác, đơn vị; theo dõi các chỉ số như doanh thu/giao dịch, chi phí/giao dịch, biên lợi nhuận, LTV.\nPhân tích chênh lệch kế hoạch - thực hiện, xác định nguyên nhân biến động và đề xuất kiến nghị cải thiện.\nPhân tích cơ cấu chi phí, năng suất và hiệu quả sử dụng nguồn lực; hỗ trợ xác định điểm hòa vốn, ngưỡng hiệu quả.\nTham gia xây dựng, cập nhật báo cáo",
+          "importance_weight": 1.0,
+          "score": 1.5
+        }
+      ]
+    },
+    {
+      "job_title": "Data Analyst Workforce Management",
+      "role_name": "Data Analyst",
+      "job_family": "data_analytics",
+      "job_url": "https://www.topcv.vn/brand/transcosmoshochiminh/tuyen-dung/data-analyst-workforce-management-j2048873.html",
+      "location": "hồ chí minh",
+      "work_mode": "unknown",
+      "score": 50.5,
+      "required_skills": [
+        "Excel",
+        "Power BI"
+      ],
+      "preferred_skills": [
+        "Statistics"
+      ],
+      "matched_skills": [
+        "Statistics"
+      ],
+      "missing_skills": [
+        "Excel",
+        "Power BI"
+      ],
+      "experience_min_years": 1.0,
+      "education_level_norm": "college",
+      "job_text_chatbot": "Job title: Data Analyst Workforce Management\n\nJob family: data_analytics\n\nLocation: hồ chí minh\n\nSalary VND/month: min=nan | max=nan\n\nRequirements:\nTốt nghiệp Cao Đẳng. Ưu tiên các ngành: Thống kê, Kinh tế, Công nghệ Thông tin hoặc các ngành liên quan. Tiếng Anh tốt. Có kiến thức cơ bản về hoạt động Contact Center và các chỉ số hiệu suất (AHT, Login rate, Productivity, Quality metrics) Hiểu biết về quy trình vận hành và quản lý hiệu suất trong môi trường dịch vụ khách hàng. Thành thạo Microsoft Excel (Pivot Table, các hàm logic, hàm tính KPI, VLOOKUP, XLOOKUP). Có kinh nghiệm làm việc với Power BI hoặc các công cụ Business Intelligence khác. Kinh nghiệm xây dựng Dashboard và Reporting. Am hiểu về xử lý và phân tích dữ liệu lớn. Tính cẩn thận, tỉ mỉ và chú ý đến chi tiết. Tư duy logic và phân tích tốt. Chủ động, tự giác trong công việc. Tinh thần trách nhiệm cao. Khả năng làm việc dưới áp lực và xử lý nhiều công việc cùng lúc. Kỹ năng giao tiếp và phối hợp tốt với nhiều phòng ban.\nTốt nghiệp Cao Đẳng.\nƯu tiên các ngành: Thống kê, Kinh tế, Công nghệ Thông tin hoặc các ngành liên quan.\nTiếng Anh tốt.\nCó kiến thức cơ bản về hoạt động Contact Center và các chỉ số hiệu suất (AHT, Login rate, Productivity, Quality metrics)\nHiểu biết về quy trình vận hành và quản lý hiệu suất trong môi trường dịch vụ khách hàng.\nThành thạo Microsoft E\n\nResponsibilities:\nDuy trì, xử lý và phân tích dữ liệu vận hành phục vụ đo lường hiệu suất nhân viên thông qua Power BI và Excel. Đảm bảo tính chính xác, nhất quán và toàn vẹn của toàn bộ dữ liệu vận hành. Hỗ trợ đối chiếu dữ liệu với hệ thống chấm công (attendance system). Thực hiện xếp hạng KPI và tính toán incentive cho nhân viên. Lập báo cáo năng suất và chất lượng định kỳ cho đội ngũ vận hành. Xuất dữ liệu và cập nhật Dashboard theo định kỳ. Theo dõi và giám sát các chỉ số vận hành chính (AHT, Login rate, Productivity, etc. Tổng hợp dữ liệu phục vụ đối soát: giờ làm việc, điểm danh, overtime, khối lượng công việc, năng suất. Hỗ trợ lập kế hoạch phân ca và theo dõi trạng thái login/logout hàng ngày. Theo dõi khối lượng công việc hàng ngày của từng nhân viên. Phối hợp chặt chẽ với Team Leader/Manager để phân tích dữ liệu và cung cấp insights. Đề xuất các giải pháp cải tiến quy trình dựa trên phân tích dữ liệu. Làm việc với nhiều phòng ban để đảm bảo luồng dữ liệu hiệu quả.\nDuy trì, xử lý và phân tích dữ liệu vận hành phục vụ đo lường hiệu suất nhân viên thông qua Power BI và Excel.\nĐảm bảo tính chính xác, nhất quán và toàn vẹn của toàn bộ dữ liệu vận hành.\nHỗ trợ đối chiếu dữ liệu với hệ thống chấ\n\nBenefits:\nThu nhập: 10.000.000 VND - 12.000.000 VND Lương tháng 13. Xét tăng lương 1 lần/năm, lộ trình thăng tiến rõ ràng. Thưởng định kỳ 2 lần/năm dựa trên hiệu suất công việc Tham gia đầy đủ chế độ bảo hiểm: BHXH, BHYT, BHTN Quà cho nhân viên vào các dịp Lễ, Tết, các ho\nThu nhập: 10.000.000 VND - 12.000.000 VND\nLương tháng 13.\nXét tăng lương 1 lần/năm, lộ trình thăng tiến rõ ràng.\nThưởng định kỳ 2 lần/năm dựa trên hiệu suất công việc\nTham gia đầy đủ chế độ bảo hiểm: BHXH, BHYT, BHTN\nQuà cho nhân viên vào các dịp Lễ, Tết, các ho\n\nRequired skills: excel; power bi\n\nPreferred skills: statistics",
+      "relevant_sections": [
+        {
+          "section_type": "title",
+          "chunk_order": 1,
+          "chunk_text": "data analyst workforce management",
+          "importance_weight": 1.5,
+          "score": 2.5
+        },
+        {
+          "section_type": "requirements",
+          "chunk_order": 2,
+          "chunk_text": "Tốt nghiệp Cao Đẳng. Ưu tiên các ngành: Thống kê, Kinh tế, Công nghệ Thông tin hoặc các ngành liên quan. Tiếng Anh tốt. Có kiến thức cơ bản về hoạt động Contact Center và các chỉ số hiệu suất (AHT, Login rate, Productivity, Quality metrics) Hiểu biết về quy trình vận hành và quản lý hiệu suất trong môi trường dịch vụ khách hàng. Thành thạo Microsoft Excel (Pivot Table, các hàm logic, hàm tính KPI, VLOOKUP, XLOOKUP). Có kinh nghiệm làm việc với Power BI hoặc các công cụ Business Intelligence khác. Kinh nghiệm xây dựng Dashboard và Reporting. Am hiểu về xử lý và phân tích dữ liệu lớn. Tính cẩn thận, tỉ mỉ và chú ý đến chi tiết. Tư duy logic và phân tích tốt. Chủ động, tự giác trong công việc.",
+          "importance_weight": 1.3,
+          "score": 2.3
+        },
+        {
+          "section_type": "requirements",
+          "chunk_order": 3,
+          "chunk_text": "đến chi tiết. Tư duy logic và phân tích tốt. Chủ động, tự giác trong công việc. Tinh thần trách nhiệm cao. Khả năng làm việc dưới áp lực và xử lý nhiều công việc cùng lúc. Kỹ năng giao tiếp và phối hợp tốt với nhiều phòng ban.\nTốt nghiệp Cao Đẳng.\nƯu tiên các ngành: Thống kê, Kinh tế, Công nghệ Thông tin hoặc các ngành liên quan.\nTiếng Anh tốt.\nCó kiến thức cơ bản về hoạt động Contact Center và các chỉ số hiệu suất (AHT, Login rate, Productivity, Quality metrics)\nHiểu biết về quy trình vận hành và quản lý hiệu suất trong môi trường dịch vụ khách hàng.\nThành thạo Microsoft Excel (Pivot Table, các hàm logic, hàm tính KPI, VLOOKUP, XLOOKUP).\nCó kinh nghiệm làm việc với Power BI hoặc các công cụ",
+          "importance_weight": 1.3,
+          "score": 2.3
+        }
+      ]
+    },
+    {
+      "job_title": "Data Analyst ( Fresher ) - Game Industry",
+      "role_name": "Data Analyst",
+      "job_family": "data_analytics",
+      "job_url": "https://www.topcv.vn/viec-lam/data-analyst-fresher-game-industry/1561434.html",
+      "location": "hà nội",
+      "work_mode": "remote",
+      "score": 46.25,
+      "required_skills": [
+        "Statistics",
+        "Python",
+        "SQL",
+        "Excel"
+      ],
+      "preferred_skills": [
+        "Power BI",
+        "Tableau",
+        "looker"
+      ],
+      "matched_skills": [
+        "Statistics"
+      ],
+      "missing_skills": [
+        "Python",
+        "SQL",
+        "Excel",
+        "Power BI",
+        "Tableau",
+        "looker"
+      ],
+      "experience_min_years": 0.0,
+      "education_level_norm": "bachelor",
+      "job_text_chatbot": "Job title: Data Analyst ( Fresher ) - Game Industry\n\nJob family: data_analytics\n\nLocation: hà nội\n\nWork mode: remote\n\nSalary VND/month: min=nan | max=13000000.0\n\nRequirements:\nKnowledge:\nFinal-year student or fresh graduate in Data Analytics, Business Analytics, Statistics, Mathematics, Computer Science, or related fields\nAble to work full-time at the office\n6 months - 1 year of experience in a similar role\nStrong foundation in statistics and analytical thinking\nBasic understanding of monetization models and game publishing workflows is a plus\nPreferred: Interest or experience in mobile/casual games\nSkill:\nStrong analytical and planning skills; ability to turn complex data into practical insights\nProficient in SQL and intermediate Python\nFamiliarity with Power BI / Tableau / Looker / AppScript is a plus\nGood verbal and written communication skills\nFluent in English communication\nProficient in Google Sheets, Excel, and Canva\nDetail-oriented with strong organizational and time management abilities\nAble to work both independently and collaboratively\nAttitude:\nProactive, positive, and accountable in your work\nSystematic thinking, independent learning, and self-management\nCareful, honest, and responsible\nQuick to adapt, able to work under pressure\nThrive in a fast-paced environment\nWilling to commit long-term with the company\n\nResponsibilities:\nPlan, execute, and deeply analyze A/B tests (gameplay, MO); set up tracking and remote config for game products\nProcess and analyze raw data; visualize data as requested by relevant departments\nSupport monetization decisions using data: design IAP shop, configure ad flows and ad networks\nMonitor game performance, analyze key metrics (retention, funnel, LTV, etc.) and recommend improvements\nBuild predictive models or simulations (e.g., economy sinks/sources, level tuning models) to support long-term balance and scalability.\nPartner with QA and development teams to ensure balancing changes are implemented accurately and tested thoroughly.\nCollaborate across teams to provide data-driven product advice, report results, and share internal insights\n\nBenefits:\nCOMPENSATION & GROWTH OPPORTUNITIES\nSalary: Up to 13,000,000 VND/month\nWork directly on global game products with large user bases and real-world data\nGain hands-on experience across the full data lifecycle: from tracking and visualization to operational optimization\nContinuously develop and expand your knowledge and professional skills\nClear and personalized career development roadmap\nWORKING ENVIRONMENT\nDynamic and professional working culture\nEnjoy full daily-life care and internal benefit policies\nWELFARE POLICIES\nHoliday and Tet bonuses\nUnlimited profit-sharing based on performance\nWORKING TIME\nMonday - Friday\nMorning: 8:30 - 12:00 | Afternoon: 13:00 - 18:00 | Tea break: 15:00 - 15:30\n\nRequired skills: statistics; python; sql; excel\n\nPreferred skills: power bi; tableau; looker",
+      "relevant_sections": [
+        {
+          "section_type": "requirements",
+          "chunk_order": 2,
+          "chunk_text": "Knowledge:\nFinal-year student or fresh graduate in Data Analytics, Business Analytics, Statistics, Mathematics, Computer Science, or related fields\nAble to work full-time at the office\n6 months - 1 year of experience in a similar role\nStrong foundation in statistics and analytical thinking\nBasic understanding of monetization models and game publishing workflows is a plus\nPreferred: Interest or experience in mobile/casual games\nSkill:\nStrong analytical and planning skills; ability to turn complex data into practical insights\nProficient in SQL and intermediate Python\nFamiliarity with Power BI / Tableau / Looker / AppScript is a plus\nGood verbal and written communication skills\nFluent in Englis",
+          "importance_weight": 1.3,
+          "score": 3.8
+        },
+        {
+          "section_type": "title",
+          "chunk_order": 1,
+          "chunk_text": "data analyst fresher - game industry",
+          "importance_weight": 1.5,
+          "score": 2.5
+        },
+        {
+          "section_type": "requirements",
+          "chunk_order": 3,
+          "chunk_text": "ppScript is a plus\nGood verbal and written communication skills\nFluent in English communication\nProficient in Google Sheets, Excel, and Canva\nDetail-oriented with strong organizational and time management abilities\nAble to work both independently and collaboratively\nAttitude:\nProactive, positive, and accountable in your work\nSystematic thinking, independent learning, and self-management\nCareful, honest, and responsible\nQuick to adapt, able to work under pressure\nThrive in a fast-paced environment\nWilling to commit long-term with the company",
+          "importance_weight": 1.3,
+          "score": 2.3
+        }
+      ]
+    },
+    {
+      "job_title": "Phân Tích Dữ Liệu Kinh Doanh / Data Analyst Thu Nhập Từ 15 - 18 Triệu Tại Hà Nội",
+      "role_name": "Data Analyst",
+      "job_family": "data_analytics",
+      "job_url": "https://www.topcv.vn/viec-lam/phan-tich-du-lieu-kinh-doanh-data-analyst-thu-nhap-tu-15-18-trieu-tai-ha-noi/1989039.html",
+      "location": "hà nội",
+      "work_mode": "unknown",
+      "score": 46.25,
+      "required_skills": [
+        "Statistics",
+        "Excel"
+      ],
+      "preferred_skills": [],
+      "matched_skills": [
+        "Statistics"
+      ],
+      "missing_skills": [
+        "Excel"
+      ],
+      "experience_min_years": 2.0,
+      "education_level_norm": "college",
+      "job_text_chatbot": "Job title: Phân Tích Dữ Liệu Kinh Doanh / Data Analyst Thu Nhập Từ 15 - 18 Triệu Tại Hà Nội\n\nJob family: data_analytics\n\nLocation: hà nội\n\nSalary VND/month: min=15000000.0 | max=18000000.0\n\nRequirements:\n- Tốt nghiệp Cao đẳng/Đại học các ngành Thống kê, Kinh tế, CNTT, Phân tích dữ liệu.\n- Tư duy logic, cẩn trọng, làm việc tốt với số liệu.\n- Thành thạo Excel; ưu tiên có kinh nghiệm ERP.\n- Tối thiểu 2 năm làm việc tại vị trí tương đương\n\nResponsibilities:\nThu thập và quản lý dữ liệu\n- Thu thập dữ liệu từ các bộ phận: Kinh doanh, Kho, Mua hàng, Kế toán và các hệ thống phần mềm liên quan\n- Kiểm tra, chuẩn hóa và đối soát dữ liệu giữa các nguồn.\n- Quản lý, lưu trữ dữ liệu khoa học, đảm bảo tính bảo mật và khả năng truy xuất.\nXây dựng và theo dõi chỉ số kinh doanh\n- Xây dựng hệ thống chỉ số kinh doanh: doanh thu, lợi nhuận, tồn kho, hiệu suất bán hàng, hiệu quả kinh doanh...\n- Theo dõi, cập nhật thường xuyên và phát hiện kịp thời các biến động bất thường.\nPhân tích và trực quan hóa dữ liệu\n- Phân tích dữ liệu theo sản phẩm, khách hàng, khu vực, thời gian, kênh bán hàng....\n- Sử dụng các công cụ trực quan hóa (Excel nâng cao, Power BI, Tableau...) để xây dựng báo cáo và trình bày dữ liệu một cách dễ hiểu\n- Ứng dụng công nghệ, công cụ mới nhằm nâng cao hiệu quả và độ chính xác của phân tích.\nLập báo cáo định kỳ/ đột xuất và phân tích chuyên sâu\n- Giải trình số liệu, hỗ trợ cung cấp thông tin phục vụ công tác điều hành và ra quyết định.\n- Phối hợp với các bộ phận để làm rõ số liệu và đề xuất phương án tối ưu.\n\nBenefits:\n- Thu nhập từ 15 - 18 triệu (có thể trao đổi thêm trong quá trình phỏng vấn)\n- Chế độ lương thưởng theo quy chế lương, thưởng của Công ty\n- Các ngày lễ tết, sinh nhật, du lịch theo chính sách Công ty\n- Đãi ngộ và các khoản thưởng theo quy chế lương, thưởng của Công ty\n- Được ghi nhận, đánh giá đúng năng lực, gia tăng thu nhập và cơ hội thăng tiến\n- Được tham gia các khóa đào tạo nâng cao năng lực.\n\nRequired skills: statistics; excel",
+      "relevant_sections": [
+        {
+          "section_type": "title",
+          "chunk_order": 1,
+          "chunk_text": "phân tích dữ liệu kinh doanh / data analyst",
+          "importance_weight": 1.5,
+          "score": 2.5
+        },
+        {
+          "section_type": "requirements",
+          "chunk_order": 2,
+          "chunk_text": "- Tốt nghiệp Cao đẳng/Đại học các ngành Thống kê, Kinh tế, CNTT, Phân tích dữ liệu.\n- Tư duy logic, cẩn trọng, làm việc tốt với số liệu.\n- Thành thạo Excel; ưu tiên có kinh nghiệm ERP.\n- Tối thiểu 2 năm làm việc tại vị trí tương đương",
+          "importance_weight": 1.3,
+          "score": 2.3
+        },
+        {
+          "section_type": "description",
+          "chunk_order": 3,
+          "chunk_text": "Thu thập và quản lý dữ liệu\n- Thu thập dữ liệu từ các bộ phận: Kinh doanh, Kho, Mua hàng, Kế toán và các hệ thống phần mềm liên quan\n- Kiểm tra, chuẩn hóa và đối soát dữ liệu giữa các nguồn.\n- Quản lý, lưu trữ dữ liệu khoa học, đảm bảo tính bảo mật và khả năng truy xuất.\nXây dựng và theo dõi chỉ số kinh doanh\n- Xây dựng hệ thống chỉ số kinh doanh: doanh thu, lợi nhuận, tồn kho, hiệu suất bán hàng, hiệu quả kinh doanh...\n- Theo dõi, cập nhật thường xuyên và phát hiện kịp thời các biến động bất thường.\nPhân tích và trực quan hóa dữ liệu\n- Phân tích dữ liệu theo sản phẩm, khách hàng, khu vực, thời gian, kênh bán hàng....\n- Sử dụng các công cụ trực quan hóa (Excel nâng cao, Power BI, Tableau...)",
+          "importance_weight": 1.0,
+          "score": 1.5
+        }
+      ]
+    }
+  ],
+  "matched_job_sections": [
+    {
+      "job_title": "Credit Risk Analytics And Modelling Expert",
+      "role_name": "Data Analyst",
+      "section_type": "requirements",
+      "chunk_text": "Tối thiểu 8 năm kinh nghiệm trong lĩnh vực Ngân hàng, Mô hình hóa Rủi ro hoặc các lĩnh vực tương đương. Hiểu biết về các quy định và thông lệ quốc tế về Basel 2, IFRS9 và Kiểm tra Stress-Test. Kinh nghiệm sâu rộng trong việc xây dựng các giải pháp dữ liệu và phân tích, khai thác dữ liệu (data mining), phân tích thống kê và trực quan hóa dữ liệu (data visualization). Kinh nghiệm cung cấp thông tin chuyên sâu dựa trên dữ kiện để giúp quản lý cấp cao và các bên liên quan khác nhận ra giá trị doanh nghiệp trên quy mô lớn. Tư duy và khả năng đưa ra quyết định chiến lược, có khả năng làm việc với quản lý rất cấp cao, chuyển đổi ngôn ngữ công nghệ sang kinh doanh và ngược lại. Bằng Cử nhân hoặc cao",
+      "score": 2.3
+    },
+    {
+      "job_title": "Credit Risk Analytics And Modelling Expert",
+      "role_name": "Data Analyst",
+      "section_type": "requirements",
+      "chunk_text": "huyển đổi ngôn ngữ công nghệ sang kinh doanh và ngược lại. Bằng Cử nhân hoặc cao hơn (tài chính / ngân hàng / quản lý rủi ro tài chính / toán tài chính / tài chính định lượng). Ưu tiên đào tạo ở cấp độ đại học hoặc sau đại học trong các lĩnh vực này tại các quốc gia phát triển Có các chứng chỉ được quốc tế công nhận về phân tích tài chính, quản lý rủi ro tài chính là một lợi thế (ví dụ: FRM, CFA, PRM, CPA, ...). Yêu cầu về trình độ tiếng Anh tuân theo chính sách của Techcombank.\nTối thiểu 8 năm kinh nghiệm trong lĩnh vực Ngân hàng, Mô hình hóa Rủi ro hoặc các lĩnh vực tương đương.\nHiểu biết về các quy định và thông lệ quốc tế về Basel 2, IFRS9 và Kiểm tra Stress-Test.\nKinh nghiệm sâu rộng tr",
+      "score": 2.3
+    },
+    {
+      "job_title": "Credit Risk Analytics And Modelling Expert",
+      "role_name": "Data Analyst",
+      "section_type": "requirements",
+      "chunk_text": "ng lệ quốc tế về Basel 2, IFRS9 và Kiểm tra Stress-Test.\nKinh nghiệm sâu rộng trong việc xây dựng các giải pháp dữ liệu và phân tích, khai thác dữ liệu (data mining), phân tích thống kê và trực quan hóa dữ liệu (data visualization).\nKinh nghiệm cung cấp thông tin chuyên sâu dựa trên dữ kiện để giúp quản lý cấp cao và các bên liên quan khác nhận ra giá trị doanh nghiệp trên quy mô lớn.\nTư duy và khả năng đưa ra quyết định chiến lược, có khả năng làm việc với quản lý rất cấp cao, chuyển đổi ngôn ngữ công nghệ sang kinh doanh và ngược lại.\nBằng Cử nhân hoặc cao hơn (tài chính / ngân hàng / quản lý rủi ro tài chính / toán tài chính / tài chính định lượng).\nƯu tiên đào tạo ở cấp độ đại học hoặc s",
+      "score": 2.3
+    },
+    {
+      "job_title": "Chuyên Viên Power BI,Tableau",
+      "role_name": "Data Analyst",
+      "section_type": "requirements",
+      "chunk_text": "Tốt nghiệp Đại học các ngành Kinh tế, Tài chính, Thống kê, Toán, CNTT hoặc liên quan.\nChuyên viên:\nTối thiểu 1 năm kinh nghiệm phân tích dữ liệu/báo cáo quản trị.\nTư duy logic, cẩn trọng, chủ động; khả năng tổng hợp và trình bày số liệu tốt.\nThành thạo Excel; ưu tiên biết SQL, Power BI/Tableau/BI tools; có hiểu biết về mô hình tài chính, dự báo là lợi thế.",
+      "score": 2.3
+    },
+    {
+      "job_title": "Chuyên Viên Power BI,Tableau",
+      "role_name": "Data Analyst",
+      "section_type": "title",
+      "chunk_text": "chuyên viên power bi,tableau",
+      "score": 1.5
+    },
+    {
+      "job_title": "Chuyên Viên Power BI,Tableau",
+      "role_name": "Data Analyst",
+      "section_type": "description",
+      "chunk_text": "Thu thập, tổng hợp, đối soát và chuẩn hóa dữ liệu phục vụ phân tích quản trị: doanh thu, phí, chi phí, sản phẩm/dịch vụ, đối tác, khách hàng, nhân sự, vận hành nền tảng.\nTham gia xây dựng và vận hành kho dữ liệu, danh mục chỉ tiêu và tiêu chuẩn dữ liệu phục vụ báo cáo.\nThực hiện phân tích hiệu quả kinh doanh - vận hành theo sản phẩm, kênh, đối tác, đơn vị; theo dõi các chỉ số như doanh thu/giao dịch, chi phí/giao dịch, biên lợi nhuận, LTV.\nPhân tích chênh lệch kế hoạch - thực hiện, xác định nguyên nhân biến động và đề xuất kiến nghị cải thiện.\nPhân tích cơ cấu chi phí, năng suất và hiệu quả sử dụng nguồn lực; hỗ trợ xác định điểm hòa vốn, ngưỡng hiệu quả.\nTham gia xây dựng, cập nhật báo cáo",
+      "score": 1.5
+    }
+  ],
+  "cv_skill_count": 4
+}
